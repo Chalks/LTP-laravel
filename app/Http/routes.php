@@ -10,9 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::model('leagues', "League");
+Route::bind('leagues', function($value, $route) {
+	return App\League::whereSlug($value)->first();
+});
+Route::resource('leagues', 'LeagueController');
 
-Route::get('/', 'WelcomeController@index');
-
+Route::get('/', 'LeagueController@index');
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
